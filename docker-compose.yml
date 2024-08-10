@@ -1,0 +1,15 @@
+# docker run --name api-gympass-pg -e POSTGRESQL_USERNAME=jeanmbiz -e POSTGRESQL_PASSWORD=jmb1987 -e 
+# POSTGRESQL_DATABASE=api-gympass -p 5432:5432 bitnami/postgresql
+
+version: '3'
+
+services:
+  api-gympass-pg:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=jeanmbiz
+      - POSTGRESQL_PASSWORD=jmb1987
+      - POSTGRESQL_DATABASE=api-gympass
+
