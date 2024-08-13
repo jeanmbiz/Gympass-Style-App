@@ -58,9 +58,10 @@ describe('Register Use Case', () => {
     })
 
     // espero que a 2ª vez que tentar registrar o usuário com mesmo email
+    // sempre que o expect tiver uma promisse dentro dele, utilizar await e () =>
     // o retorno do execute é uma promisse
     // a promisse deve rejeitar e retornar uma instância de UserAlreadyExistsError
-    expect(() =>
+    await expect(() =>
       registerUseCase.execute({
         name: 'Jean',
         email,
