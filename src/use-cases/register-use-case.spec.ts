@@ -1,17 +1,28 @@
-import { expect, describe, it } from 'vitest'
+import { expect, describe, it, beforeEach } from 'vitest'
 import { RegisterUseCase } from './register-use-case'
 import { compare } from 'bcryptjs'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 
+// iniciar variávies utilizadas em todos os testes
+let inMemoryUsersRepository: InMemoryUsersRepository
+let sut: RegisterUseCase
+
 describe('Register Use Case', () => {
+  // executar variáveis antes de cada teste, afim de isolar elas de cada teste
+  // o que está no before each não pe globalmente visivel em todos os testes
+  // por isso tem que iniciar as variáceis com let no escopo global
+  beforeEach(() => {
+    // Mocka as dependências de RegisterUseCase utilizando o InMemoryUsersRepository()
+    inMemoryUsersRepository = new InMemoryUsersRepository()
+    // sut é a principal variavel que está sendo testada (no caso AuthenticateUseCase)
+    // sut = System Under Test
+    sut = new RegisterUseCase(inMemoryUsersRepository)
+  })
+
   // Teste para criar usuário com sucesso
   it('Should be able to register', async () => {
-    // Mocka as dependências de RegisterUseCase utilizando o InMemoryUsersRepository()
-    const usersRepository = new InMemoryUsersRepository()
-    const registerUseCase = new RegisterUseCase(usersRepository)
-
-    const { user } = await registerUseCase.execute({
+    const { user } = await sut.execute({
       name: 'Jean',
       email: 'mail@mail.com.br',
       password: '123456',
@@ -23,11 +34,7 @@ describe('Register Use Case', () => {
 
   // Teste para verificar se o hash da senha está sendo gerado
   it('Should hash user password upon registration', async () => {
-    // Mocka as dependências de RegisterUseCase utilizando o InMemoryUsersRepository()
-    const usersRepository = new InMemoryUsersRepository()
-    const registerUseCase = new RegisterUseCase(usersRepository)
-
-    const { user } = await registerUseCase.execute({
+    const { user } = await sut.execute({
       name: 'Jean',
       email: 'mail@mail.com.br',
       password: '123456',
@@ -45,13 +52,10 @@ describe('Register Use Case', () => {
 
   // Teste para não criar usuário com email repetido
   it('Should not be able to register with same email twice', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const registerUseCase = new RegisterUseCase(usersRepository)
-
     const email = 'jeanmbiz@hotmail.com'
 
     // cadastra 1x
-    await registerUseCase.execute({
+    await sut.execute({
       name: 'Jean',
       email,
       password: '123456',
@@ -62,7 +66,7 @@ describe('Register Use Case', () => {
     // o retorno do execute é uma promisse
     // a promisse deve rejeitar e retornar uma instância de UserAlreadyExistsError
     await expect(() =>
-      registerUseCase.execute({
+      sut.execute({
         name: 'Jean',
         email,
         password: '123456',
