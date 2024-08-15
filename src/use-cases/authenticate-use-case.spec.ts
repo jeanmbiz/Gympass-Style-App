@@ -37,7 +37,7 @@ describe('Authenticate Use Case', () => {
   it('Should not be able to authenticate with wrong email', async () => {
     // no teste ele tenta se autenticar com email que nao existe no DB
     // execute é uma promisse qeu retorna uma instancia de erro
-    expect(() =>
+    await expect(() =>
       sut.execute({
         email: 'mail@mail.com.br',
         password: '123456',
@@ -49,7 +49,7 @@ describe('Authenticate Use Case', () => {
   it('Should not be able to authenticate with wrong password', async () => {
     // no teste ele tenta se autenticar com senha que nao existe no DB
     // execute é uma promisse qeu retorna uma instancia de erro
-    expect(() =>
+    await expect(() =>
       sut.execute({
         email: 'mail@mail.com.br',
         password: '123456',

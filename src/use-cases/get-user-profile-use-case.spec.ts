@@ -36,7 +36,7 @@ describe('Get User Profile Use Case', () => {
   it('Should not be able to authenticate with wrong email', async () => {
     // no teste ele tenta buscar usuário com id que nao existe no DB
     // execute é uma promisse qeu retorna uma instancia de erro
-    expect(() =>
+    await expect(() =>
       sut.execute({
         userId: 'non-existing-id',
       }),
