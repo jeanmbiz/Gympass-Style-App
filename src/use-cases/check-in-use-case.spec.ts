@@ -3,25 +3,27 @@ import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-c
 import { CheckInUseCase } from './check-in-use-case'
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
 import { Decimal } from '@prisma/client/runtime/library'
+import { MaxDistanceError } from './errors/max-distance-error'
+import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error'
 
 let inMemoryCheckInsRepository: InMemoryCheckInsRepository
 let inMemoryGymsRepository: InMemoryGymsRepository
 let sut: CheckInUseCase
 
 describe('Check-In Use Case', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     inMemoryCheckInsRepository = new InMemoryCheckInsRepository()
     inMemoryGymsRepository = new InMemoryGymsRepository()
     sut = new CheckInUseCase(inMemoryCheckInsRepository, inMemoryGymsRepository)
 
     // cria academia para cada teste
-    inMemoryGymsRepository.items.push({
+    await inMemoryGymsRepository.create({
       id: 'gym-id',
-      title: 'Javascript Gyn',
+      title: 'Javascript Gym',
       Description: '',
-      latitude: new Decimal(-26.9049912),
-      Longitude: new Decimal(-49.213212),
       phone: '',
+      latitude: -26.9049912,
+      Longitude: -49.213212,
     })
 
     // para usar Datas mockadas
@@ -67,7 +69,7 @@ describe('Check-In Use Case', () => {
         userLatitude: -26.9049912,
         userLongitude: -49.213212,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
   })
 
   // teste para ser possível fazer check-in em dias diferentes
@@ -118,6 +120,6 @@ describe('Check-In Use Case', () => {
         userLatitude: -26.9049912,
         userLongitude: -49.213212,
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(MaxDistanceError)
   })
 })
