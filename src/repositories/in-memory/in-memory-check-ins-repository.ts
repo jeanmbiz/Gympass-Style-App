@@ -22,6 +22,16 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     return checkIn
   }
 
+  // método para buscar uma lista de check-ins de um usuário
+  async findManyByUserId(userId: string, page: number) {
+    return (
+      this.items
+        .filter((item) => item.user_id === userId)
+        // lógica da paginação: slice retorna o índice do array
+        .slice((page - 1) * 20, page * 20)
+    )
+  }
+
   // método para buscar checkin do usuário em uma data
   async findByUserIdOnDate(userId: string, date: Date) {
     // Dia atual com hora zerada - inicio do dia
