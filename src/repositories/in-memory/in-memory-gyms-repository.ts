@@ -33,4 +33,13 @@ export class InMemoryGymsRepository implements GymsRepository {
 
     return gym
   }
+
+  async searchMany(query: string, page: number) {
+    return (
+      this.items
+        .filter((item) => item.title.includes(query))
+        // lógica da paginação: slice retorna o índice do array
+        .slice((page - 1) * 20, page * 20)
+    )
+  }
 }
