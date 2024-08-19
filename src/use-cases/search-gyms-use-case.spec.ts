@@ -44,7 +44,7 @@ describe('Search Gyms Use Case', () => {
   })
 
   // Teste para listar academias com paginação
-  it.skip('Should be able to fetch paginated gyms search', async () => {
+  it('Should be able to fetch paginated gyms search', async () => {
     // criar 22 check-ins fake
     for (let i = 1; i <= 22; i++) {
       await inMemoryGymsRepository.create({
