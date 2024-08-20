@@ -27,7 +27,7 @@ describe('Check-In Use Case', () => {
     })
 
     // para usar Datas mockadas
-    vi.useRealTimers()
+    vi.useFakeTimers()
   })
 
   afterEach(() => {
