@@ -22,6 +22,31 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     return checkIn
   }
 
+  // método para atualizar o checkIn no banco de dados
+  async save(checkIn: CheckIn) {
+    // busca o índice do checkIn
+    const checkInIndex = this.items.findIndex((item) => item.id === checkIn.id)
+
+    // se checkIn for encontrado
+    if (checkInIndex >= 0) {
+      // atualiza índice do checkIn com novo checkIn
+      this.items[checkInIndex] = checkIn
+    }
+
+    return checkIn
+  }
+
+  // método para buscar checkIn por id
+  async findById(checkInId: string) {
+    const checkIn = this.items.find((item) => item.id === checkInId)
+
+    if (!checkIn) {
+      return null
+    }
+
+    return checkIn
+  }
+
   // método para buscar uma lista de check-ins de um usuário
   async findManyByUserId(userId: string, page: number) {
     return (
