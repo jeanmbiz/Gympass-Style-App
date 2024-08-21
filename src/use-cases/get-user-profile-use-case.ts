@@ -2,18 +2,18 @@ import { UsersRepository } from '@/repositories/users-repository'
 import { User } from '@prisma/client'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
-interface GetUserProfileCaseRequest {
+interface GetUserProfileUseCaseRequest {
   userId: string
 }
-interface GetUserProfileCaseResponse {
+interface GetUserProfileUseCaseResponse {
   user: User
 }
 
-export class GetUserProfileCase {
+export class GetUserProfileUseCase {
   constructor(private usersRepository: UsersRepository) {}
   async execute({
     userId,
-  }: GetUserProfileCaseRequest): Promise<GetUserProfileCaseResponse> {
+  }: GetUserProfileUseCaseRequest): Promise<GetUserProfileUseCaseResponse> {
     // buscar usuário no banco pelo id utilizando o método findById
     const user = await this.usersRepository.findById(userId)
 
