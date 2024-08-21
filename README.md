@@ -31,4 +31,4 @@ Gympass Style App
 - [x] Todas as listas de dados precisam estar paginadas com 20 itens por página
 - [ ] O usuário pode ser identificado por um JWT (JSON WEB TOKEN)
 
-- [] Tirar comentários desnecessários do código
+- [ ] Tirar comentários desnecessários do código - limpeza de código
