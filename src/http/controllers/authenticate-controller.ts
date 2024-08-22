@@ -23,12 +23,15 @@ export async function authenticateController(
       password,
     })
 
-    // jwtSign: server para criar novo token
-    // sign: para gravar informações do usuário no token
+    // jwtSign: server para gerar token do usuário
     const token = await reply.jwtSign(
-      {},
+      {
+        // guarda informações adicionais do usuário
+        email: user.email,
+      },
       {
         sign: {
+          // sub: campo reservado no token JWT para guardar id do usuário
           sub: user.id,
         },
       },
