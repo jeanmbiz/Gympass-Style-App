@@ -1,18 +1,18 @@
 import { expect, describe, it, beforeEach } from 'vitest'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { hash } from 'bcryptjs'
-import { GetUserProfileCase } from './get-user-profile-use-case'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { GetUserProfileUseCase } from './get-user-profile-use-case'
 
 // iniciar variávies utilizadas em todos os testes
 let inMemoryUsersRepository: InMemoryUsersRepository
-let sut: GetUserProfileCase
+let sut: GetUserProfileUseCase
 
 describe('Get User Profile Use Case', () => {
   // executar variáveis antes de cada teste, afim de isolar elas de cada teste
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository()
-    sut = new GetUserProfileCase(inMemoryUsersRepository)
+    sut = new GetUserProfileUseCase(inMemoryUsersRepository)
   })
 
   // Teste para buscar usuário com sucesso
