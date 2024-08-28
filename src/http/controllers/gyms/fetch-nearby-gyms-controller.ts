@@ -20,7 +20,7 @@ export async function fetchNearbyGymsController(
 
   const { latitude, longitude } = fetchNearbyGymsSchema.parse(request.body)
 
-  // chama a factory de RegisterUseCase
+  // chama a factory de FetchNearbyGymsUseCase
   const fetchNearbyGymsUseCase = makeFetchNearbyGymsUseCase()
 
   // pega retorno do caso de uso

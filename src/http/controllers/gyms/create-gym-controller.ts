@@ -24,7 +24,7 @@ export async function createGymController(
   const { title, Description, phone, latitude, Longitude } =
     createGymBodySchema.parse(request.body)
 
-  // chama a factory de RegisterUseCase
+  // chama a factory de CreateGymUseCase
   const createGymUseCase = makeCreateGymUseCase()
 
   await createGymUseCase.execute({

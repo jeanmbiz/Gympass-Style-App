@@ -15,7 +15,7 @@ export async function searchGymsController(
 
   const { query, page } = searchGymsQueryParamsSchema.parse(request.body)
 
-  // chama a factory de RegisterUseCase
+  // chama a factory de SearchGymsUseCase
   const searchGymsUseCase = makeSearchGymsUseCase()
 
   // pega retorno do caso de uso
