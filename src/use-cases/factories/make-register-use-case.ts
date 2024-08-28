@@ -1,10 +1,12 @@
 import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository'
-import { RegisterUseCase } from '../register-use-case'
+import { CreateUserRegisterUseCase } from '../create-user-register-use-case'
 
-export function makeRegisterUseCase() {
-  // todas as dependências de RegisterUseCase centralizadas
+export function makeCreateUserRegisterUseCase() {
+  // todas as dependências de CreateUserRegisterUseCase centralizadas
   const usersRepository = new PrismaUsersRepository()
-  const registerUseCase = new RegisterUseCase(usersRepository)
+  const createUserRegisterUseCase = new CreateUserRegisterUseCase(
+    usersRepository,
+  )
 
-  return registerUseCase
+  return createUserRegisterUseCase
 }
