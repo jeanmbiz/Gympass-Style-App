@@ -6,14 +6,16 @@ export async function searchGymsController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const searchGymsQueryParamsSchema = z.object({
+  // valida parametros da query. ex: /search?query=javascript&sort=desc
+  const searchGymsQuerySchema = z.object({
     query: z.string(),
     // todo req.queryparams são strings
     // coerce converte string para número e faz validação
     page: z.coerce.number().min(1).default(1),
   })
 
-  const { query, page } = searchGymsQueryParamsSchema.parse(request.body)
+  // busca parametros validados da query. ex: /search?query=javascript&sort=desc
+  const { query, page } = searchGymsQuerySchema.parse(request.query)
 
   // chama a factory de SearchGymsUseCase
   const searchGymsUseCase = makeSearchGymsUseCase()

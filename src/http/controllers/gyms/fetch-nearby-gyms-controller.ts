@@ -6,7 +6,8 @@ export async function fetchNearbyGymsController(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const fetchNearbyGymsSchema = z.object({
+  // valida parametros da query. ex: /search?query=javascript&sort=desc
+  const fetchNearbyGymsQuerySchema = z.object({
     // refine para validação que não é padrão do zod
     latitude: z.number().refine((value) => {
       // validalçao de latitude ser <= +-90
@@ -18,7 +19,10 @@ export async function fetchNearbyGymsController(
     }),
   })
 
-  const { latitude, longitude } = fetchNearbyGymsSchema.parse(request.body)
+  // busca parametros validados da query. ex: /search?query=javascript&sort=desc
+  const { latitude, longitude } = fetchNearbyGymsQuerySchema.parse(
+    request.query,
+  )
 
   // chama a factory de FetchNearbyGymsUseCase
   const fetchNearbyGymsUseCase = makeFetchNearbyGymsUseCase()
