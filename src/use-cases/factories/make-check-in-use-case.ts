@@ -1,11 +1,15 @@
 import { PrismaGymsRepository } from '@/repositories/prisma/prisma-gyms-repository'
-import { CheckInUseCase } from '../check-in-use-case'
+
 import { PrismaCheckInsRepository } from '@/repositories/prisma/prisma-check-ins-repository'
+import { CreateCheckInUseCase } from '../create-check-in-use-case'
 
 export function makeCheckInUseCase() {
   const checkInsRepository = new PrismaCheckInsRepository()
   const gymsRepository = new PrismaGymsRepository()
-  const checkInUseCase = new CheckInUseCase(checkInsRepository, gymsRepository)
+  const createCheckInUseCase = new CreateCheckInUseCase(
+    checkInsRepository,
+    gymsRepository,
+  )
 
-  return checkInUseCase
+  return createCheckInUseCase
 }

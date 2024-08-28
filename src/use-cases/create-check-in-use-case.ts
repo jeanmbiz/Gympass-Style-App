@@ -1,4 +1,4 @@
-import { GymsRepository } from './../repositories/gyms-repository'
+import { GymsRepository } from '../repositories/gyms-repository'
 import { CheckInsRepository } from '@/repositories/check-ins-repository'
 import { CheckIn } from '@prisma/client'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
@@ -16,7 +16,7 @@ interface CheckInUseCaseResponse {
   checkIn: CheckIn
 }
 
-export class CheckInUseCase {
+export class CreateCheckInUseCase {
   constructor(
     private checkInsRepository: CheckInsRepository,
     private gymsRepository: GymsRepository,
