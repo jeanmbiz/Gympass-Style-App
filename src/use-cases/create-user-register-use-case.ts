@@ -13,7 +13,7 @@ interface RegisterUseCaseResponse {
   user: User
 }
 
-export class RegisterUseCase {
+export class CreateUserRegisterUseCase {
   // construtor recebe as dependências - Inversão de Dependência
   constructor(private usersRepository: UsersRepository) {}
 

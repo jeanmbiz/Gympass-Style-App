@@ -1,12 +1,12 @@
 import { expect, describe, it, beforeEach } from 'vitest'
-import { RegisterUseCase } from './register-use-case'
+import { CreateUserRegisterUseCase } from './create-user-register-use-case'
 import { compare } from 'bcryptjs'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 
 // iniciar variávies utilizadas em todos os testes
 let inMemoryUsersRepository: InMemoryUsersRepository
-let sut: RegisterUseCase
+let sut: CreateUserRegisterUseCase
 
 describe('Register Use Case', () => {
   // executar variáveis antes de cada teste, afim de isolar elas de cada teste
@@ -17,7 +17,7 @@ describe('Register Use Case', () => {
     inMemoryUsersRepository = new InMemoryUsersRepository()
     // sut é a principal variavel que está sendo testada (no caso AuthenticateUseCase)
     // sut = System Under Test
-    sut = new RegisterUseCase(inMemoryUsersRepository)
+    sut = new CreateUserRegisterUseCase(inMemoryUsersRepository)
   })
 
   // Teste para criar usuário com sucesso
