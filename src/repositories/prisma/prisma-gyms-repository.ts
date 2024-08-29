@@ -44,7 +44,7 @@ export class PrismaGymsRepository implements GymsRepository {
     // seleciona todas as academias onde a lat e long são menores ou iguais à 10m
     const gyms = await prisma.$queryRaw<Gym[]>`
     SELECT * from gyms
-    WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
+    WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( "Longitude" ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
     `
 
     return gyms
