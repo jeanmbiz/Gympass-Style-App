@@ -1,4 +1,5 @@
 import { app } from '@/app'
+import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user'
 import request from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
@@ -14,21 +15,8 @@ describe('Profile Controller (e2e)', () => {
 
   // teste e2e para buscar perfil do usuário logado
   it('should be able to get user profile', async () => {
-    // request para criar novo usuário
-    await request(app.server).post('/users').send({
-      name: 'User',
-      email: 'email@email.com.br',
-      password: '123456',
-    })
-
-    // request para logar usuário
-    const authResponse = await request(app.server).post('/sessions').send({
-      email: 'email@email.com.br',
-      password: '123456',
-    })
-
-    // pego token de autenticação do usuáiro logado
-    const { token } = authResponse.body
+    // utiliza hook para criar usuário, autenticar e retorna o token
+    const { token } = await createAndAuthenticateUser(app)
 
     // request para listar perfil do usuário autenticado com token
     const profileResponse = await request(app.server)
