@@ -2,7 +2,7 @@ import { expect, describe, it, beforeEach } from 'vitest'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { AuthenticateUseCase } from './authenticate-use-case'
 import { hash } from 'bcryptjs'
-import { InvalidCredentialsError } from './errors/invalid-credetials-error'
+import { InvalidCredentialsError } from './errors/invalid-credentials-error'
 
 // iniciar variávies utilizadas em todos os testes
 let inMemoryUsersRepository: InMemoryUsersRepository
