@@ -27,6 +27,7 @@ export async function authenticateController(
     const token = await reply.jwtSign(
       {
         email: user.email,
+        role: user.role,
       },
       {
         sign: {
@@ -41,6 +42,7 @@ export async function authenticateController(
       {
         // guarda email do usuário no refresh token, para dps passar informação para JWT
         email: user.email,
+        role: user.role,
       },
       {
         sign: {
