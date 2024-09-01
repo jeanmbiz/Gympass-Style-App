@@ -13,6 +13,7 @@ export async function refreshTokenController(
     const token = await reply.jwtSign(
       {
         email: request.user.email,
+        role: request.user.role,
       },
       {
         sign: {
@@ -25,6 +26,7 @@ export async function refreshTokenController(
     const refreshToken = await reply.jwtSign(
       {
         email: request.user.email,
+        role: request.user.role,
       },
       {
         sign: {
