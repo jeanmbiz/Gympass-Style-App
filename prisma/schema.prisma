@@ -13,11 +13,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// enum é opção em lista no prisma
+// lista sempre em caixa alta
+enum ROLE {
+  ADMIN
+  MEMBER
+}
+
 model User {
   id            String   @id @default(uuid())
   name          String
   email         String   @unique
   password_hash String
+  role          ROLE     @default(MEMBER) // cargo do usuário no db, padrão membro
   created_at    DateTime @default(now())
 
   // Prisma cria automaticamente relacionamento inverso
