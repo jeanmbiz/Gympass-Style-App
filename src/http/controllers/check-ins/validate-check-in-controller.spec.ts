@@ -17,7 +17,8 @@ describe('Validate Check-in Controller (e2e)', () => {
   // teste e2e para criar check-in
   it('should be able to validate a check-in', async () => {
     // utiliza hook para criar usuário, autenticar e retorna o token
-    const { token } = await createAndAuthenticateUser(app)
+    // passa como 2º parâmetro true, para criar usuário como admin
+    const { token } = await createAndAuthenticateUser(app, true)
 
     // busca dados do usuário no banco
     const user = await prisma.user.findFirstOrThrow()

@@ -16,7 +16,7 @@ describe('Create Gym Controller (e2e)', () => {
   // teste e2e para criar academia
   it('should be able to create a gym', async () => {
     // utiliza hook para criar usuário, autenticar e retorna o token
-    const { token } = await createAndAuthenticateUser(app)
+    const { token } = await createAndAuthenticateUser(app, true)
 
     // request para criar academia
     const response = await request(app.server)

@@ -16,7 +16,7 @@ describe('Fetch Nearby Gyms Controller (e2e)', () => {
   // teste e2e para buscas academias próximas
   it('should be able to list nearby gyms', async () => {
     // utiliza hook para criar usuário, autenticar e retorna o token
-    const { token } = await createAndAuthenticateUser(app)
+    const { token } = await createAndAuthenticateUser(app, true)
 
     // criar acadedmias para posteriormente busca-las
     await request(app.server)
