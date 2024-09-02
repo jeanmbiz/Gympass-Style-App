@@ -1,0 +1,31 @@
+# nome do worflow
+name: Run Unit Tests
+
+# quanndo executar este workflow
+on: [push]
+
+# executar trabalhos
+jobs:
+  # nome do job
+  run-unit-tests:
+    name: Run Unit Tests
+    # qual maquina executar testes
+    runs-on: ubuntu-latest
+
+    # passos - detalhar ações do processo
+    steps:
+      # baixar código
+      - uses: actions/checkout@v3
+
+      #   instalar node versão 20
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          #   criar cahce das dependencias instaladas
+          cache: "npm"
+
+        #   instalar dependencias
+      - run: npm ci
+
+      #   rodar testes unitários
+      - run: npm run test
